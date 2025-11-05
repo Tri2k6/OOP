@@ -33,7 +33,7 @@ int Polynomial::getDegree() {
 }
 
 double Polynomial::getCoeff(size_t idx) {
-    if (idx > _degree + 1) throw std::invalid_argument("Loi so mu khong nam trong da thuc");
+    if (idx > _degree) throw std::invalid_argument("Loi so mu khong nam trong da thuc");
     return Coef_arr[idx];
 }
 

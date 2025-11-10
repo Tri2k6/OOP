@@ -7,6 +7,6 @@ const string InputFile = "INPUT.TXT";
 const string OutputFile = "OUTPUT.TXT";
 
 int main() {
-
+    Solve(InputFile, OutputFile);
     return 0;
 }

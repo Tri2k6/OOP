@@ -1,6 +1,8 @@
 #include "Account.h"
 
-Account::Account(float initial_balance) : m_balance(initial_balance) {}
+Account::Account(float initial_balance) {
+    m_balance = (initial_balance > 0) ? initial_balance : 0;
+}
 
 float Account::getBalance() const { 
     return m_balance; 
@@ -16,5 +18,3 @@ bool Account::withdraw(float money) {
     m_balance -= money;
     return true;
 }
-
-Account::~Account() {}

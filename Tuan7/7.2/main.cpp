@@ -5,33 +5,32 @@
 using namespace std;
 
 int main() {
-    cout << fixed << setprecision(2);
+
+    SavingAccount mySaver(0,6,12.0); 
+
+    cout << "=== DEMO TAI KHOAN ===" << endl;
     
-    SavingAccount Acc(1000, 12.0, 12);
+    mySaver.deposit(1000);
+    
+    cout << "\n--- Troi qua 3 thang ---" << endl;
+    mySaver.increaseDuration();
+    mySaver.increaseDuration();
+    mySaver.increaseDuration();
+    mySaver.printStatus();
+    
+    cout << "\n--- Nap them 500 ---" << endl;
+    mySaver.deposit(500); 
+    mySaver.printStatus();
 
-    Acc.printStatus();
 
-    cout << "\n --------------Deposit (6 months later) --------" << endl;
+    cout << "\n--- Troi qua 6 thang ---" << endl;
+    for(int i=0; i<6; i++) mySaver.increaseDuration();
+    mySaver.printStatus();
 
-    for (int i = 0;i < 6;i++) Acc.increaseDuration();
 
-    Acc.deposit(500);
-    Acc.printStatus();
-
-    cout << "\n----------------Withdraw (3 months later)--------" << endl;
-
-    for (int i = 0;i < 3;i++) Acc.increaseDuration();
-
-    Acc.withdraw(200);
-    Acc.printStatus();
-
-    cout << "\n---------------Withdraw Failed -------------------" << endl;
-
-    if (!Acc.withdraw(2000)) {
-        cout << "Failed to withdraw 2000." << endl;
-    }
-
-    Acc.printStatus();
+    cout << "\n--- Rut 200 ---" << endl;
+    mySaver.withdraw(200);
+    mySaver.printStatus();
 
     return 0;
 }

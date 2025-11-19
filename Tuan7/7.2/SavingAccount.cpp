@@ -4,36 +4,33 @@
 SavingAccount::SavingAccount(float initial_balance, float rate, int period)
     : Account(initial_balance), m_rate(rate), m_period(period), m_duration(0) {}
 
-SavingAccount::~SavingAccount() {}
-
 float SavingAccount::calculateInterest() const {
-    float interest = getBalance() * (m_rate / 100.0f) * ((float)m_duration / 12.0f);
-    return interest;
+    if (m_duration < m_period) return 0.0f;
+    return getBalance() * (m_rate / 100.0f) * (1.0f * m_duration / 12.0f);
 }
 
 void SavingAccount::deposit(float money) {
     float interest = calculateInterest();
-    std::cout << "  (Interest added: " << interest << ")" << std::endl;
 
-    Account::deposit(interest); 
+    if (interest > 0) {
+        Account::deposit(interest);
+    }
 
-    Account::deposit(money); 
+    Account::deposit(money);
 
     m_duration = 0;
 }
 
 bool SavingAccount::withdraw(float money) {
     float interest = calculateInterest();
-    std::cout << "  (Interest added: " << interest << ")" << std::endl;
-    
-    Account::deposit(interest); 
-    
-    bool success = Account::withdraw(money);
-    
-    if (success) {
-        m_duration = 0;
+
+    if (interest > 0) {
+        Account::deposit(interest);
     }
-    return success;
+
+    bool res = Account::withdraw(money);
+    m_duration = 0;
+    return res;
 }
 
 void SavingAccount::increaseDuration() {
